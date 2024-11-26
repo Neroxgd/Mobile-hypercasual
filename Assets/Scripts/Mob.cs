@@ -9,6 +9,7 @@ public class Mob : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private GameObject attackHitBox;
     private float currentHealth;
+    private bool isAttacking;
     private PlayerReference player;
 
     private void Start()
@@ -19,10 +20,15 @@ public class Mob : MonoBehaviour
 
     private void Update()
     {
+
+        if (Vector3.Distance(player.GetPlayerPosition, transform.position) < distanceCanAttack)
+        {
+            if (!isAttacking)
+                StartCoroutine(Attack());
+            return;
+        }
         transform.position = Vector3.MoveTowards(transform.position, player.GetPlayerPosition, speed * Time.deltaTime);
         transform.rotation = Quaternion.LookRotation(player.GetPlayerPosition - transform.position, Vector3.up);
-        if (Vector3.Distance(player.GetPlayerPosition, transform.position) < distanceCanAttack)
-            StartCoroutine(Attack());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,9 +44,11 @@ public class Mob : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        isAttacking = true;
         yield return new WaitForSeconds(timeBeforeAttack);
         attackHitBox.SetActive(true);
         yield return new WaitForSeconds(timeHitBoxAttack);
         attackHitBox.SetActive(false);
+        isAttacking = false;
     }
 }

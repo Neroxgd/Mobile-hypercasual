@@ -6,7 +6,10 @@ public class AttackHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (CompareTag("Player"))
+        if (other.CompareTag("Player"))
+        {
             PlayerReference.Instance.DealDamage(damage);
+            print("atk");
+        }
     }
 }

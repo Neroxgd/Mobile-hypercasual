@@ -12,7 +12,6 @@ public class CameraMovement : MonoBehaviour
         float closeToBordureWidth = Mathf.Abs(Input.mousePosition.x - Screen.width / 2f) / Screen.width;
         float closeToBordureHeight = Mathf.Abs(Input.mousePosition.y - Screen.height / 2f) / Screen.height;
         closeToBordure = closeToBordureWidth > closeToBordureHeight ? closeToBordureWidth : closeToBordureHeight;
-        print(closeToBordure);
         currentSpeed = Time.deltaTime * speed * closeToBordure;
         transform.position = Vector3.MoveTowards(transform.position, PlayerReference.Instance.GetPlayerPosition + cameraTarget, currentSpeed);
         // print(Camera.main.ViewportToScreenPoint(new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height)));

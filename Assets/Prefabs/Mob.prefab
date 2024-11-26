@@ -326,7 +326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 127279d577f25ac4ea17dae3782e5074, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -345,6 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 81900282000736186}
+  - component: {fileID: 4176391345273886497}
   - component: {fileID: 2451338177931719161}
   m_Layer: 0
   m_Name: attack hit box
@@ -352,7 +353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &81900282000736186
 Transform:
   m_ObjectHideFlags: 0
@@ -368,6 +369,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7604716063660746086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4176391345273886497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320984168409709672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab4fc6fa61aee24f9a1bda4e05ee616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!136 &2451338177931719161
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -441,8 +455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710677a85976bce4194a85367f077ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  distanceCanAttack: 0
+  speed: 20
+  distanceCanAttack: 2
   timeBeforeAttack: 0.5
   timeHitBoxAttack: 0.5
   maxHealth: 100
