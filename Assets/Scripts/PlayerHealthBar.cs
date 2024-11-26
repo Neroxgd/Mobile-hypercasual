@@ -4,24 +4,25 @@ using UnityEngine.UI;
 public class PlayerHealthBar : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
-    [SerializeField] private int playerMaxHealth = 100;
-    private int playerCurrentHealth;
+    [SerializeField] private float playerMaxHealth = 100;
+    [SerializeField] private GameObject pauseMenu;
+    private float playerCurrentHealth;
 
     private void Start()
     {
         playerCurrentHealth = playerMaxHealth;
     }
 
-    public void SetHealth(int amount)
+    public void SetHealth(float amount)
     {
         playerCurrentHealth -= amount;
-        healthBar.fillAmount = (float)playerCurrentHealth / (float)playerMaxHealth;
+        healthBar.fillAmount = playerCurrentHealth / playerMaxHealth;
         if (playerCurrentHealth <= 0)
             Lose();
     }
 
     private void Lose()
     {
-
+        pauseMenu.SetActive(true);
     }
 }

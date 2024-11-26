@@ -4,24 +4,25 @@ using System.Collections;
 
 public class Mob : MonoBehaviour
 {
-    [SerializeField] private float speed = 1f, distanceCanAttack = 3f, timeBeforeAttack = 0.5f, timeHitBoxAttack = 0.5f;
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private Image healthBar;
-    [SerializeField] private GameObject attackHitBox;
-    private float currentHealth;
+    [SerializeField] private float speed = 1f, distanceCanAttack = 3f, timeBeforeAttack = 0.5f, damage = 10f;
+    [SerializeField] private float maxHealth = 100;
+    private bool CloseEnoughToPlayForAttack => Vector3.Distance(player.GetPlayerPosition, transform.position) < distanceCanAttack;
+    public Image healthBar;
+    public float CurrentHealth { get; set; }
+    public float MaxHealth => maxHealth;
     private bool isAttacking;
     private PlayerReference player;
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
         player = PlayerReference.Instance;
     }
 
     private void Update()
     {
 
-        if (Vector3.Distance(player.GetPlayerPosition, transform.position) < distanceCanAttack)
+        if (CloseEnoughToPlayForAttack)
         {
             if (!isAttacking)
                 StartCoroutine(Attack());
@@ -29,26 +30,15 @@ public class Mob : MonoBehaviour
         }
         transform.position = Vector3.MoveTowards(transform.position, player.GetPlayerPosition, speed * Time.deltaTime);
         transform.rotation = Quaternion.LookRotation(player.GetPlayerPosition - transform.position, Vector3.up);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            currentHealth -= player.GetCurrentVelocity;
-            if (currentHealth <= 0)
-                Destroy(gameObject);
-            healthBar.fillAmount = currentHealth / maxHealth;
-        }
+        healthBar.transform.parent.LookAt(Camera.main.transform);
     }
 
     private IEnumerator Attack()
     {
         isAttacking = true;
         yield return new WaitForSeconds(timeBeforeAttack);
-        attackHitBox.SetActive(true);
-        yield return new WaitForSeconds(timeHitBoxAttack);
-        attackHitBox.SetActive(false);
+        if (CloseEnoughToPlayForAttack)
+            player.DealDamage(damage);
         isAttacking = false;
     }
 }

@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class AttackHitBox : MonoBehaviour
 {
-    [SerializeField] private int damage = 10;
+    private Mob mob;
+    private PlayerReference player;
+
+    private void Start()
+    {
+        mob = GetComponentInParent<Mob>();
+        player = PlayerReference.Instance;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerReference.Instance.DealDamage(damage);
-            gameObject.SetActive(false);
-            print("atk");
+            mob.CurrentHealth -= player.GetCurrentVelocity;
+            if (mob.CurrentHealth <= 0)
+                Destroy(mob.gameObject);
+            mob.healthBar.fillAmount = mob.CurrentHealth / mob.MaxHealth;
         }
     }
 }

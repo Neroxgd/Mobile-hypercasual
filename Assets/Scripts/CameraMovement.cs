@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     private float closeToBordure;
     private PlayerReference player;
 
-    private void Awake()
+    private void Start()
     {
         player = PlayerReference.Instance;
     }

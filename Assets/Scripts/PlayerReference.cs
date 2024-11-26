@@ -21,7 +21,7 @@ public class PlayerReference : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
         playerHealthBar.SetHealth(damage);
     }

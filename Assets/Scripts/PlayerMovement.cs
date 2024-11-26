@@ -35,16 +35,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Vector3 relativePos = target - transform.position;
+        rb.velocity = relativePos * speed;
         if (isPressing)
         {
             Ray ray = Camera.main.ScreenPointToRay(inputPosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100, layerGround))
                 target = hit.point + Vector3.up;
+            if (relativePos != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
         }
-        Vector3 relativePos = target - transform.position;
-        rb.velocity = relativePos * speed;
-        if (relativePos != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
     }
 }
