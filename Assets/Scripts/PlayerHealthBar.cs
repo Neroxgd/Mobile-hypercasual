@@ -15,7 +15,7 @@ public class PlayerHealthBar : MonoBehaviour
     public void SetHealth(int amount)
     {
         playerCurrentHealth -= amount;
-        print(playerCurrentHealth);
+        healthBar.fillAmount = (float)playerCurrentHealth / (float)playerMaxHealth;
         if (playerCurrentHealth <= 0)
             Lose();
     }

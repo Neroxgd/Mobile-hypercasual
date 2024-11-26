@@ -4,8 +4,9 @@ public class PlayerReference : MonoBehaviour
 {
     public static PlayerReference Instance { get; private set; }
     private PlayerMovement playerMovement;
-    private PlayerHealthBar playerHealthBar;
+    [SerializeField] private PlayerHealthBar playerHealthBar;
     public Vector3 GetPlayerPosition => transform.position;
+    public Vector3 GetInputPosition => playerMovement.GetInputPosition;
     public float GetCurrentVelocity => playerMovement.rigidbodyPlayer.velocity.magnitude;
 
     private void Awake()
@@ -18,7 +19,6 @@ public class PlayerReference : MonoBehaviour
         Instance = this;
 
         playerMovement = GetComponent<PlayerMovement>();
-        playerHealthBar = GetComponent<PlayerHealthBar>();
     }
 
     public void DealDamage(int damage)

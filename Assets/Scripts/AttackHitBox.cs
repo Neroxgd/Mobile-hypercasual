@@ -9,6 +9,7 @@ public class AttackHitBox : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerReference.Instance.DealDamage(damage);
+            gameObject.SetActive(false);
             print("atk");
         }
     }
