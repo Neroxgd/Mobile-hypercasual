@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rigidbodyPlayer => rb;
     public Vector3 GetInputPosition => inputPosition;
     [SerializeField] private LayerMask layerGround;
+    [SerializeField] private ParticleSystem particleWalk;
     [SerializeField] private float speed = 1f;
     private Rigidbody rb;
     private Vector3 target, inputPosition;
@@ -46,5 +47,7 @@ public class PlayerMovement : MonoBehaviour
             if (relativePos != Vector3.zero)
                 transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
         }
+        var emission = particleWalk.emission;   
+        emission.rateOverTime = rb.velocity.magnitude;
     }
 }
