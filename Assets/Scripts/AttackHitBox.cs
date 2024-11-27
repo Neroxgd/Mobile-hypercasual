@@ -17,7 +17,7 @@ public class AttackHitBox : MonoBehaviour
         {
             mob.CurrentHealth -= player.GetCurrentVelocity;
             if (mob.CurrentHealth <= 0)
-                Destroy(mob.gameObject);
+                mob.Dead();
             mob.healthBar.fillAmount = mob.CurrentHealth / mob.MaxHealth;
         }
     }
