@@ -19,6 +19,7 @@ public class PlayerHealthBar : MonoBehaviour
         playerCurrentHealth -= amount;
         healthBar.fillAmount = playerCurrentHealth / playerMaxHealth;
         damageBloodOverlay.DOFade(1, 0.2f).OnComplete(() => damageBloodOverlay.DOFade(Mathf.Abs(healthBar.fillAmount - 1f), 0.2f));
+        Camera.main.DOShakePosition(0.3f, 1, 10, 90, true, ShakeRandomnessMode.Full);
         if (playerCurrentHealth <= 0)
             Lose();
     }
