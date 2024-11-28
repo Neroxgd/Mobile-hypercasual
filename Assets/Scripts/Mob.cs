@@ -59,4 +59,10 @@ public class Mob : MonoBehaviour
         animator.SetTrigger("Dead");
         Destroy(gameObject, 3f);
     }
+
+    public void OnDestroy()
+    {
+        if (GameManager.Instance)
+            GameManager.Instance.IsWinning();
+    }
 }
