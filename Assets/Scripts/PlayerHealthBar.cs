@@ -24,8 +24,9 @@ public class PlayerHealthBar : MonoBehaviour
             Lose();
     }
 
-    private void Lose()
+    public void Lose()
     {
         pauseMenu.SetActive(true);
+        PlayerReference.Instance.DisableInputs(false);
     }
 }
