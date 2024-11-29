@@ -433,9 +433,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  distanceCanAttack: 2
+  distanceCanAttack: 3.5
   timeBeforeAttack: 0.5
-  damage: 10
+  damage: 5
   animationSpeed: 3
   maxHealth: 1000
   animator: {fileID: 7475774291081613257}
